@@ -1,0 +1,71 @@
+
+<!--
+  Generated from actor_collisions.world.erb
+  Seed: 8784956
+-->
+<?xml version="1.0" ?>
+<sdf version="1.6">
+<world name="default">
+  <include>
+    <uri>model://ground_plane</uri>
+  </include>
+  <include>
+    <uri>model://sun</uri>
+  </include>
+  <!-- Create a static collision model -->
+  <model name="human_94763_collision_model">
+    <pose>0 0 -100 0 0 0</pose>
+    <static>true</static>
+    <link name="link">
+      <collision name="link">
+        <pose>0 -0.18 0.05 0 -1.5707963267948966 0</pose>
+        <geometry>
+          <box>
+            <size>0.44 1.62 0.60</size>
+          </box>
+        </geometry>
+      </collision>
+    </link>
+  </model>
+
+  <!-- Create your actor -->
+  <actor name="human_94763">
+
+    <!-- Starting pose, nice for when the world is reset -->
+    <pose>-1 4.5 1 1.57 0 -1.57</pose>
+
+    <!-- Actor visual model -->
+    <skin>
+      <filename>model://actor/meshes/SKIN_man_green_shirt.dae</filename>
+    </skin>
+
+    <!-- Actor animation -->
+    <animation name="animation">
+      <filename>model://actor/meshes/ANIMATION_walking.dae</filename>
+    </animation>
+
+    <!-- Actor plugin 1 -->
+    <!-- Actor motion -->
+    <plugin name="trajectory" filename="/home/zhenh/code/actor_collisions/plugin/libTrajectoryActorPlugin.so">
+        <target>-1 4.5 1 1.57 0 0</target>
+        <velocity>1.0</velocity>
+       <obstacle_margin>1.5</obstacle_margin>
+       <target_radius>0.2</target_radius>
+    </plugin>
+
+    <!-- Actor plugin 2 -->
+    <!-- Enable collisions -->  
+      <plugin name="attach_model" filename="/home/zhenh/code/actor_collisions/plugin/libAttachModelPlugin.so">
+        <link>
+          <link_name>human_94763_pose</link_name>
+          <model>
+            <model_name>human_94763_collision_model</model_name>
+          </model>
+        </link>
+      </plugin>
+
+  </actor>
+  
+
+ </world>
+</sdf>
