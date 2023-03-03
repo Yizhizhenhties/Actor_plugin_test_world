@@ -47,6 +47,7 @@
     <!-- Actor plugin 1 -->
     <!-- Actor motion -->
     <plugin name="trajectory" filename="/home/zhenh/code/actor_collisions/plugin/libTrajectoryActorPlugin.so">
+        <actor_name>actor1</actor_name>
         <target>-1 4.5 1 1.57 0 0</target>
         <velocity>1.0</velocity>
        <obstacle_margin>1.5</obstacle_margin>
